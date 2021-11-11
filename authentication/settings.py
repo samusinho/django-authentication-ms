@@ -101,11 +101,11 @@ WSGI_APPLICATION = 'authentication.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'p65c4_auth',
-        'HOST': 'localhost',
+        'NAME': 'dfbfakkrsrh77k',
+        'HOST': 'ec2-34-224-239-147.compute-1.amazonaws.com',
         'PORT': 5432,
-        'PASSWORD': 'samuel',
-        'USER': 'samuel'
+        'PASSWORD': '15126ea87797075a4df63cc789e9aa8580898f8c33e832f51e3daa49d71006fa',
+        'USER': 'smlerwalfknyln'
     }
 }
 
