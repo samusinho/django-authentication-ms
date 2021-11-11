@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import UserAPI, Login, VerifyToken, verifyTokenManually
+from api.views import UserAPI, Login, VerifyToken, VerifyTokenManually
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -23,10 +23,11 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/create_user', UserAPI.as_view(), name="api_create_user"),
+    path('api/users', UserAPI.as_view(), name="users"),
+    path('api/users/<int:id>', UserAPI.as_view(), name="user_detail"),
     path('api/login', Login.as_view(), name="api_login_user"),
     path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-    path('verify-token-manually', verifyTokenManually.as_view()),
+    path('verify-token-manually', VerifyTokenManually.as_view()),
     path('verify-token', VerifyToken.as_view())
 ]

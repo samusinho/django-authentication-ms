@@ -18,6 +18,23 @@ class UserAPI(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    ####################################
+    def get(self, request, *args, **kwargs):
+        print(kwargs.get('id'))
+        if kwargs.get('id') is None:
+            users = User.objects.all()
+            users_serializer = UserSerializer(users, many=True)
+            return Response(users_serializer.data, status=status.HTTP_200_OK)
+        else:
+            user = User.objects.get(id=kwargs.get('id'))
+            user_serializer = UserSerializer(user)
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+    
+    def delete(self, request, *args, **kwargs):
+        user = User.objects.get(id=kwargs.get('id'))
+        user.delete()
+        return Response({ 'message': 'El usuario ha sido eliminado' })
+    
 
 class Login(ObtainAuthToken):
     def post(self, request):
@@ -40,7 +57,7 @@ class Login(ObtainAuthToken):
         else:
             return Response({ 'error': 'Nombre de usuario y/o contraseña incorrectos' }, status=status.HTTP_400_BAD_REQUEST)
 
-class AuthView(APIView):
+class AuthView(APIView): #middleware
     user: User
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -59,7 +76,7 @@ class AuthView(APIView):
         except Exception as e:
             return JsonResponse({'error': e.__str__()}, status=status.HTTP_401_UNAUTHORIZED)
 
-class verifyTokenManually(AuthView):
+class VerifyTokenManually(AuthView):
     def get(self, request):
         return Response({ 'message': 'Puedes ver esto porque estás autenticado' }, status=status.HTTP_200_OK)
 
