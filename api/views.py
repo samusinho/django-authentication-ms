@@ -9,6 +9,7 @@ import datetime
 from authentication.settings import SECRET_KEY
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class UserAPI(APIView):
     def post(self, request):
@@ -82,5 +83,8 @@ class VerifyTokenManually(AuthView):
 
 class VerifyToken(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
     def get(self, request):
-        return Response({ 'message': 'Puedes ver esto porque estás autenticado' }, status=status.HTTP_200_OK)
+        data = UserSerializer(request.user).data
+        del data['password']
+        return Response(data, status=status.HTTP_200_OK)

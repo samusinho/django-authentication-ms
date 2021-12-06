@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-iudf=9p@9^rq($^rfw0(@ww19(*oug1dw3wh!d27z1cfu4tanl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', 'https://auth-ms-p.herokuapp.com/', 'auth-ms-p.herokuapp.com']
 
 # Application definition
 
@@ -47,9 +46,6 @@ INSTALLED_APPS = [
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
     'ALGORITHM': 'HS256',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
@@ -101,11 +97,11 @@ WSGI_APPLICATION = 'authentication.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dfbfakkrsrh77k',
-        'HOST': 'ec2-34-224-239-147.compute-1.amazonaws.com',
+        'NAME': 'd5jn0jf8r7vjaf',
+        'HOST': 'ec2-54-157-16-125.compute-1.amazonaws.com',
         'PORT': 5432,
-        'PASSWORD': '15126ea87797075a4df63cc789e9aa8580898f8c33e832f51e3daa49d71006fa',
-        'USER': 'smlerwalfknyln'
+        'PASSWORD': '1888185a682287ab66b870e5aa541f9b31e30f0a6e55ad5772710955dcb83b77',
+        'USER': 'qspbdghwjtqynk'
     }
 }
 
